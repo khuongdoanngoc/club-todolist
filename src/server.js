@@ -3,6 +3,7 @@ const { engine } = require('express-handlebars')
 const route = require('./routes/route')
 const methodOvevride = require('method-override')
 const app = express()
+const path = require('path')
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -14,11 +15,11 @@ db.connectToDB()
 
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
-app.set('views', './src/resources/views')
+app.set('views', path.join('/resources/views'))
 
 app.use(methodOvevride('_method'))
 
-app.use(express.static('./src/public'))
+app.use(express.static(path.join('/public')))
 app.use(express.urlencoded())
 app.use(express.json())
 
