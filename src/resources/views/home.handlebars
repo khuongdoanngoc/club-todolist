@@ -1,0 +1,96 @@
+<div id="myDIV" class="header">
+  <h2>Football Clubs</h2>
+  <form method="post" name="form" action="/createClub">
+    <input type="text" id="myInput" name="club" placeholder="Club..." required>
+    <button type="submit" class="addBtn">Add</button>
+  </form>
+</div>
+<ul id="myUL">
+  {{#each clubs}}
+  <li>
+    {{this.clubs}}
+
+    <button class="updateButtons" data-id="{{this.id}}" data-club="{{this.clubs}}">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/88/88016.png?w=1380&t=st=1683821471~exp=1683822071~hmac=e81a014c5adf96380eeb29200fe7447dcd1ae71c53dc702003c48628d0fdb024"
+        alt="" width="30" height="24">
+    </button>
+
+    <button type="submit" data-id="{{this.id}}" class="close">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/63/63597.png?w=1380&t=st=1683824365~exp=1683824965~hmac=40a5d515bb1f7fff4023295b612bf8c560d48bccd86bd3ffa7367425f914c276"
+        alt="" width="30" height="24">
+    </button>
+  </li>
+  {{/each}}
+</ul>
+
+<form name="deleteForm" method="POST"></form>
+
+
+
+<script>
+
+  var clubId
+  var clubName
+  var deleteButtons = document.querySelectorAll('.close')
+  var deleteForm = document.forms['deleteForm']
+  var updateButtons = document.querySelectorAll('.updateButtons')
+  var input = document.getElementById('myInput')
+  var addButton = document.querySelector('.addBtn')
+  var form = document.forms['form']
+
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault()
+      clubId = button.dataset.id
+      deleteForm.action = '/' + clubId + '/delete?_method=DELETE'
+      deleteForm.submit()
+    })
+  })
+
+
+
+  updateButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault()
+
+      // value
+      clubId = button.dataset.id
+      clubName = button.dataset.club
+      input.style.backgroundColor = '#7FFFD4'
+      input.value = clubName
+
+      // update mode on
+      addButton.innerHTML = 'Save'
+      addButton.classList.remove('addBtn')
+      addButton.classList.add('saveBtn')
+      form.action = '/' + clubId + '/update?_method=PUT'
+
+      // save action
+      addButton.onclick = function () {
+        form.submit()
+      }
+
+
+      var cancelButton = document.createElement('button')
+      requestAnimationFrame(() => {
+        cancelButton.classList.add('cancelBtn')
+        cancelButton.innerHTML = 'Cancel'
+        addButton.parentNode.insertBefore(cancelButton, addButton.nextSibling)
+      })
+      cancelButton.onclick = function () {
+        addButton.innerHTML = 'Add'
+        addButton.classList.remove('saveBtn')
+        addButton.classList.add('addBtn')
+        input.style.backgroundColor = 'white'
+        input.value = ''
+        addButton.nextSibling.remove();
+        form.action = '/createClub'
+      }
+
+    })
+  })
+
+</script>

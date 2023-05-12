@@ -1,0 +1,34 @@
+{
+  "name": "train-mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node-sass --watch src/resources/scss/style.scss src/public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khuongdoanngoc/train-mongodb.git"
+  },
+  "author": "Khuong Doan Ngoc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khuongdoanngoc/train-mongodb/issues"
+  },
+  "homepage": "https://github.com/khuongdoanngoc/train-mongodb#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "method-override": "^3.0.0",
+    "mongoose": "^7.0.5",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.31.1"
+  },
+  "devDependencies": {
+    "node-sass": "^8.0.0"
+  }
+}
