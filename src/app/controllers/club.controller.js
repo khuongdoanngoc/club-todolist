@@ -1,12 +1,12 @@
 const db = require('../../config/db/connectDB')
 const connection = db.connection
-
+require('dotenv').config()
 
 class clubController {
 
     // [GET] /
     async renderHome(req, res) {
-        await connection.query('select * from footballclubs', (err, results) => {
+        await connection.query(`select * from footballclubs` , (err, results) => {
             res.render('home', { clubs: results })
         })
     }
